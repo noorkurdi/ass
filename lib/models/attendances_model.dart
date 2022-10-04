@@ -1,15 +1,15 @@
-class Attendances {
+class AttendancesModel {
   String attendanceDate;
   String sessionId;
   String studentId;
 
-  Attendances(
+  AttendancesModel(
       {required this.attendanceDate,
       required this.sessionId,
       required this.studentId});
 
-  factory Attendances.fromJson(Map<String, dynamic> json) {
-    return Attendances(
+  factory AttendancesModel.fromJson(Map<String, dynamic> json) {
+    return AttendancesModel(
       attendanceDate: json['attendance_date'] as String,
       sessionId: json['attendance_date'] as String,
       studentId: json['student_id'] as String,

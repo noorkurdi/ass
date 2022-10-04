@@ -7,6 +7,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../core/utils/app_colors.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -33,7 +35,12 @@ class HomePage extends StatelessWidget {
                     ),
                   );
                 },
-                color: Colors.purple,
+                primaryColor: AppColors.primaryColor,
+                textColor: Colors.white,
+                minWid: 10,
+                minHeight: 35,
+                maxWid: 10,
+                maxHeight: 35,
                 title: 'Edit user ',
               ),
             ),

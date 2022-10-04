@@ -4,6 +4,7 @@ import 'package:assist_app/pages/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../core/utils/app_colors.dart';
 import '../core/utils/app_strings.dart';
 import '../widgets/my_button.dart';
 
@@ -41,30 +42,46 @@ class WelcomePage extends StatelessWidget {
                   SizedBox(
                     height: 30,
                   ),
-                  MyButton(
-                      color: Colors.blue[200]!,
-                      title: 'Log In',
-                      onPressed: () {
-                        appCubit.getToken();
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: ((context) => const LogInPage()),
-                          ),
-                        );
-                        // print(appCubit.spList[0].token);
-                      }),
-                  MyButton(
-                      color: Colors.blue[200]!,
-                      title: 'Registration',
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: ((context) => const RegisterPage()),
-                          ),
-                        );
-                      }),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: MyButton(
+                        primaryColor: AppColors.primaryColor,
+                        textColor: Colors.white,
+                        minWid: 10,
+                        minHeight: 40,
+                        maxWid: 10,
+                        maxHeight: 40,
+                        title: 'تسجيل الدخول',
+                        onPressed: () {
+                          appCubit.getToken();
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: ((context) => const LogInPage()),
+                            ),
+                          );
+                          // print(appCubit.spList[0].token);
+                        }),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: MyButton(
+                        primaryColor: AppColors.primaryColor,
+                        textColor: Colors.white,
+                        minWid: 10,
+                        minHeight: 40,
+                        maxWid: 10,
+                        maxHeight: 40,
+                        title: 'تسجيل',
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: ((context) => const RegisterPage()),
+                            ),
+                          );
+                        }),
+                  ),
                 ]),
           ),
         );

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:assist_app/core/utils/app_strings.dart';
-import 'package:assist_app/status_request.dart';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
@@ -18,6 +18,8 @@ class DioHelper {
       },
     ),
   );
+
+////////////post data
 
   static Future<Response> login({
     required Map<String, dynamic> data,
@@ -53,19 +55,34 @@ class DioHelper {
         options: Options(headers: {'Authorization': 'Bearer $token'}));
   }
 
-  static Future<Either<StatusRequest, Map>> postData(
-      {required String url, required Map<String, dynamic> data}) async {
-    try {
-      Response response = await dio.post(url, data: data);
-      if (response.statusCode == 200) {
-        Map responseBody = jsonDecode(response.toString());
-        print(responseBody);
-        return Right(responseBody);
-      } else {
-        return const Left(StatusRequest.serverFailure);
-      }
-    } catch (e) {
-      return const Left(StatusRequest.serverExeption);
-    }
+  ///////get data
+  ///
+  ///
+  static Future<Response> getAllUsers() async {
+    return await dio.get(
+      GETALLUSERS,
+    );
   }
+
+  static Future<Response> getAllCourses() async {
+    return await dio.get(
+      GETALLCOURSES,
+    );
+  }
+
+  static Future<Response> getAllCourseTypes() async {
+    return await dio.get(
+      GETALLCOURSETYPES,
+    );
+  }
+
+  static Future<Response> getAllCertificates() async {
+    return await dio.get(GETALLCERTIFICATES);
+  }
+
+// static Future<Response> getAllCertificatetypes() async {
+//     return await dio.get(
+//       GETALLCERTIFICATETYPES
+//     );
+//   }
 }

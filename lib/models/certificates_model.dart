@@ -1,4 +1,4 @@
-class Certificates {
+class CertificatesModel {
   int numberOfSessions;
   int numberOfHours;
   String grantDate;
@@ -8,7 +8,7 @@ class Certificates {
   String certificateQr;
   int certificateTypeId;
 
-  Certificates(
+  CertificatesModel(
       {required this.numberOfSessions,
       required this.studentId,
       required this.numberOfHours,
@@ -18,8 +18,8 @@ class Certificates {
       required this.courseId,
       required this.teacherId});
 
-  factory Certificates.fromJson(Map<String, dynamic> json) {
-    return Certificates(
+  factory CertificatesModel.fromJson(Map<String, dynamic> json) {
+    return CertificatesModel(
       numberOfSessions: json['number_of_sessions'] as int,
       numberOfHours: json['number_of_hours'] as int,
       grantDate: json['grant_date'] as String,
@@ -28,6 +28,20 @@ class Certificates {
       courseId: json['courscourse_ideId'] as int,
       certificateQr: json['course_id'] as String,
       certificateTypeId: json['certificate_type_id'] as int,
+    );
+  }
+}
+
+class GetAllCertificates {
+  List<CertificatesModel> getAll;
+  GetAllCertificates({required this.getAll});
+  factory GetAllCertificates.fromJson(Map<String, dynamic> json) {
+    return GetAllCertificates(
+      getAll: List<CertificatesModel>.from(
+        json['data'].map(
+          (x) => CertificatesModel.fromJson(x),
+        ),
+      ),
     );
   }
 }

@@ -4,7 +4,10 @@ const LOGOUT = '/api/auth/logout';
 const REFRESH = '/api/auth/refresh';
 const ME = '/api/auth/me';
 const EDIT = '/api/users/editUserInfo/';
-const GETUSERINFO = '/api/users/getAll';
+const GETALLUSERS = '/api/users/getAll';
+const GETALLCOURSES = '/api/courses/getAll';
+const GETALLCOURSETYPES = '/api/coursesTypes/getAll';
+const GETALLCERTIFICATES = '/api/certificates/getAll';
 
 
 /// baseUrl + endpoint

@@ -43,3 +43,17 @@ class UsersModel {
     );
   }
 }
+
+class GetAllUsers {
+  List<UsersModel> getAll;
+  GetAllUsers({required this.getAll});
+  factory GetAllUsers.fromJson(Map<String, dynamic> json) {
+    return GetAllUsers(
+      getAll: List<UsersModel>.from(
+        json['data'].map(
+          (x) => UsersModel.fromjson(x),
+        ),
+      ),
+    );
+  }
+}

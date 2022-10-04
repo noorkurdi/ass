@@ -9,22 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'assist_app.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final sp = await SharedPreferences.getInstance();
   runApp(MultiBlocProvider(providers: [
     BlocProvider<AppCubit>(create: (context) => AppCubit(sp)),
-  ], child: const MyApp()));
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.purple),
-      debugShowCheckedModeBanner: false,
-      home: WelcomePage(),
-    );
-  }
+  ], child: const AssistApp()));
 }

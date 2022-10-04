@@ -1,4 +1,4 @@
-class Course {
+class CoursesModel {
   String name;
 
   String? description;
@@ -9,7 +9,7 @@ class Course {
   int courseTypeId;
   String dates;
 
-  Course({
+  CoursesModel({
     required this.name,
     required this.teacherId,
     required this.startDate,
@@ -20,8 +20,8 @@ class Course {
     required this.courseTypeId,
   });
 
-  factory Course.fromJson(Map<String, dynamic> json) {
-    return Course(
+  factory CoursesModel.fromJson(Map<String, dynamic> json) {
+    return CoursesModel(
       name: json['name'] as String,
       description:
           json["description"] != null ? json["description"] as String : null,
@@ -31,6 +31,20 @@ class Course {
       teacherId: json['teacher_id'] as int,
       courseTypeId: json['course_type_id'] as int,
       dates: json['dates'] as String,
+    );
+  }
+}
+
+class GetAllCourses {
+  List<CoursesModel> getAll;
+  GetAllCourses({required this.getAll});
+  factory GetAllCourses.fromJson(Map<String, dynamic> json) {
+    return GetAllCourses(
+      getAll: List<CoursesModel>.from(
+        json['data'].map(
+          (x) => CoursesModel.fromJson(x),
+        ),
+      ),
     );
   }
 }

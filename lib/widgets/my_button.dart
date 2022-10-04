@@ -1,36 +1,47 @@
+import 'package:assist_app/core/utils/app_colors.dart';
+import 'package:assist_app/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 
 class MyButton extends StatelessWidget {
-  MyButton({
-    required this.color,
-    required this.title,
-    required this.onPressed,
-    this.wid,
-  });
+  MyButton(
+      {required this.primaryColor,
+      required this.title,
+      required this.onPressed,
+      required this.minWid,
+      required this.minHeight,
+      required this.maxWid,
+      required this.maxHeight,
+      this.elevation,
+      required this.textColor});
 
-  final Color color;
+  final Color primaryColor;
+  final Color textColor;
   final String title;
   final VoidCallback onPressed;
-  final double? wid;
+  final double minWid;
+  final double minHeight;
+  final double maxWid;
+  final double maxHeight;
+  final double? elevation;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Material(
-        elevation: 5,
-        color: color,
-        borderRadius: BorderRadius.circular(15),
-        child: MaterialButton(
-          onPressed: onPressed,
-          minWidth: wid ?? 200,
-          height: 42,
-          child: Text(
-            title,
-            style: TextStyle(color: Colors.white),
-          ),
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        minimumSize: Size(minWid, minHeight),
+        maximumSize: Size(maxWid, maxHeight),
+        onPrimary: textColor,
+        primary: primaryColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        textStyle: TextStyle(
+          fontSize: 25,
+          fontFamily: AppStrings.appFont,
         ),
       ),
+      child: Text(title),
     );
   }
 }

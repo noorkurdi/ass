@@ -1,3 +1,4 @@
+import 'package:assist_app/core/utils/app_colors.dart';
 import 'package:assist_app/widgets/my_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -384,7 +385,12 @@ class EditPage extends StatelessWidget {
                       height: 10,
                     ),
                     MyButton(
-                        color: Colors.purple,
+                        primaryColor: AppColors.primaryColor,
+                        textColor: Colors.white,
+                        minWid: 10,
+                        minHeight: 35,
+                        maxWid: 10,
+                        maxHeight: 35,
                         title: 'save',
                         onPressed: () {
                           appCubit.editUserById(10);

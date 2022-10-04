@@ -5,6 +5,7 @@ import 'package:assist_app/pages/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../core/utils/app_colors.dart';
 import '../widgets/my_button.dart';
 
 class LogInPage extends StatelessWidget {
@@ -103,7 +104,12 @@ class LogInPage extends StatelessWidget {
                       height: 10,
                     ),
                     MyButton(
-                        color: Colors.blue[200]!,
+                        primaryColor: AppColors.primaryColor,
+                        textColor: Colors.white,
+                        minWid: 10,
+                        minHeight: 35,
+                        maxWid: 10,
+                        maxHeight: 35,
                         title: 'Log in',
                         onPressed: () async {
                           await appCubit.logInEvents();

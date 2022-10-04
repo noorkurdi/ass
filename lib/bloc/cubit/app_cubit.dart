@@ -1,6 +1,9 @@
 import 'dart:convert';
 
 import 'package:assist_app/core/utils/app_strings.dart';
+import 'package:assist_app/models/certificates_model.dart';
+import 'package:assist_app/models/course_types_model.dart';
+import 'package:assist_app/models/courses_model.dart';
 import 'package:assist_app/models/users_model.dart';
 import 'package:assist_app/pages/welcome_page.dart';
 import 'package:bloc/bloc.dart';
@@ -62,7 +65,7 @@ class AppCubit extends Cubit<AppStates> {
         print(responce.statusCode.toString());
         return false;
       }
-    } catch (e) {
+    } on DioError catch (e) {
       emit(RefreshUIAppState());
       print(e);
       return false;
@@ -90,7 +93,7 @@ class AppCubit extends Cubit<AppStates> {
         print(responce.statusCode.toString());
         return false;
       }
-    } catch (e) {
+    } on DioError catch (e) {
       emit(RefreshUIAppState());
       print(e);
       return false;
@@ -142,7 +145,7 @@ class AppCubit extends Cubit<AppStates> {
         print(responce.statusCode.toString());
         return false;
       }
-    } catch (e) {
+    } on DioError catch (e) {
       emit(RefreshUIAppState());
       print(e);
       return false;
@@ -169,7 +172,7 @@ class AppCubit extends Cubit<AppStates> {
         emit(RefreshUIAppState());
         print(response.statusCode.toString());
       }
-    } catch (e) {
+    } on DioError catch (e) {
       emit(RefreshUIAppState());
     }
   }
@@ -178,4 +181,47 @@ class AppCubit extends Cubit<AppStates> {
     sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.setString('token', '');
   }
+
+  // Future<List<UsersModel>> getAllUsers() async {
+  //   try {
+  //     var response = await DioHelper.getAllUsers();
+  //     GetAllUsers getAllUsers = GetAllUsers.fromJson(response.data);
+  //     return getAllUsers.getAll;
+  //   } on DioError catch (e) {
+  //     print(e);
+  //   }
+  // }
+
+  // Future<List<CoursesModel>> getAllcourses() async {
+  //   try {
+  //     var response = await DioHelper.getAllCourses();
+  //     GetAllCourses getAllCourses = GetAllCourses.fromJson(response.data);
+  //     return getAllCourses.getAll;
+
+  //   } on DioError catch (e) {
+  //     return
+  //   }
+  // }
+
+  // Future<List<CourseTypesModel>> getAllCourseTypes() async {
+  //   try {
+  //     var response = await DioHelper.getAllCourseTypes();
+  //     GetAllCourseTypes getAllCourseTypes =
+  //         GetAllCourseTypes.fromJson(response.data);
+  //     return getAllCourseTypes.getAll;
+  //   } on DioError catch (e) {
+  //     print(e);
+  //   }
+  // }
+
+  // Future<List<CertificatesModel>> getAllCertificates() async {
+  //   try {
+  //     var response = await DioHelper.getAllCertificates();
+  //     GetAllCertificates getAllCertificates =
+  //         GetAllCertificates.fromJson(response.data);
+  //     return getAllCertificates.getAll;
+  //   } on DioError catch (e) {
+  //     print(e);
+  //   }
+  // }
 }

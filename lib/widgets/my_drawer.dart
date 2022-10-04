@@ -211,7 +211,12 @@ class MyDrawer extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(18.0),
                 child: MyButton(
-                  color: Colors.red,
+                  primaryColor: Colors.red,
+                  textColor: Colors.white,
+                  minHeight: 20,
+                  minWid: 35,
+                  maxWid: 20,
+                  maxHeight: 35,
                   title: 'Log out',
                   onPressed: () {
                     appCubit.logOut();
