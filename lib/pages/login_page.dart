@@ -1,7 +1,9 @@
 import 'package:assist_app/bloc/cubit/app_cubit.dart';
+import 'package:assist_app/core/utils/app_strings.dart';
 import 'package:assist_app/pages/home_page.dart';
 import 'package:assist_app/pages/register_page.dart';
 import 'package:assist_app/pages/welcome_page.dart';
+import 'package:assist_app/widgets/my_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,7 +11,8 @@ import '../core/utils/app_colors.dart';
 import '../widgets/my_button.dart';
 
 class LogInPage extends StatelessWidget {
-  const LogInPage({Key? key}) : super(key: key);
+   LogInPage({Key? key}) : super(key: key);
+   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,88 +23,66 @@ class LogInPage extends StatelessWidget {
         return Scaffold(
             backgroundColor: Colors.white,
             body: Form(
+              key: formKey,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    // Container(
-                    //   height: 180,
-                    //   child: Image.asset('images/1.jpg'),
+                    // SizedBox(
+                    //   height: 50,
                     // ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    TextFormField(
-                      controller: appCubit.emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      textAlign: TextAlign.center,
-                      onChanged: (value) {},
-                      decoration: InputDecoration(
-                        hintText: 'Enter Your Email',
-                        contentPadding: EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 20,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
+Container(
+  
+                        height: 75,
+                        width: 200,
+                          child: Row(
+                        children: [
+                          Text(
+                          'تسجيل الدخول',
+                            
+                            style: TextStyle(
+                              
+                              fontSize: 40,
+                              color: AppColors.secondaryColor,
+                              fontFamily: AppStrings.appFont,
+                              
+                            ),
                           ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.purple[200]!, width: 1),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
+                          SizedBox(
+                            width: 10,
                           ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.blue[200]!, width: 2),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
+                          // Icon(Icons.list,size: 30,color: AppColors.secondaryColor,),
+                        ],
+                      )),
+                      
+              Divider(
+                  color: Colors.grey[550],
+                  thickness: 3,
+              ),
+              SizedBox(
+                            width: 7,
                           ),
-                        ),
+                    MyTextFeild(
+                        validator: true,
+                        controller: appCubit.emailController,
+                        lableText: "البريد الألكتروني",
+                        textInputType: TextInputType.emailAddress,
+                        hintText: 'ahmad@gmail.com',
                       ),
-                    ),
-                    SizedBox(
-                      height: 7,
-                    ),
-                    TextFormField(
-                      controller: appCubit.passwordController,
-                      obscureText: true,
-                      textAlign: TextAlign.center,
-                      onChanged: (value) {},
-                      decoration: InputDecoration(
-                        hintText: 'Enter Your Password',
-                        contentPadding: EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 20,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.purple[200]!, width: 1),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.blue[200]!, width: 2),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                      ),
-                    ),
                     SizedBox(
                       height: 10,
+                    ),MyTextFeild(
+                        validator: true,
+                        controller: appCubit.passwordController,
+                        lableText: "كلمة السر",
+                        textInputType: TextInputType.visiblePassword,
+                        hideInput: true,
+                        hintText: 'xxxxxxxx',
+                      ),
+                    SizedBox(
+                      height: 15,
                     ),
                     MyButton(
                         primaryColor: AppColors.primaryColor,
@@ -110,27 +91,32 @@ class LogInPage extends StatelessWidget {
                         minHeight: 35,
                         maxWid: 10,
                         maxHeight: 35,
-                        title: 'Log in',
-                        onPressed: () async {
-                          await appCubit.logInEvents();
+                        title: 'تسجيل الدخول',
+                        onPressed: ()  {
+                           if (formKey.currentState!.validate()) {
+                           appCubit.logInEvents();
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => const HomePage()));
+                           }
                         }),
+                      SizedBox(
+                        height: 5,
+                      ),
                     TextButton(
                       onPressed: () {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: ((context) => const RegisterPage()),
+                            builder: ((context) =>  RegisterPage()),
                           ),
                         );
                       },
                       child: Text(
-                        'Dont have account? ',
+                        'ليس لديك حساب؟',
                         style:
-                            TextStyle(color: Colors.purple[200], fontSize: 15),
+                            TextStyle(color: AppColors.secondaryColor,fontSize: 15),
                       ),
                     ),
                   ],

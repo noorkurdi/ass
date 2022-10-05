@@ -27,16 +27,17 @@ class WelcomePage extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      // Container(
-                      //   height: 180,
-                      //   // child: Image.asset('images/1.jpg'),
-                      // ),
-                      Text('Hay Yow',
-                          style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w900,
-                              fontStyle: FontStyle.italic,
-                              color: Colors.purple[200]))
+                      Container(
+                        height: 250,
+                        width: 250,
+                        child: Image.asset('assets/images/assist_logo.png',),
+                      ),
+                      // Text('Hay Yow',
+                      //     style: TextStyle(
+                      //         fontSize: 30,
+                      //         fontWeight: FontWeight.w900,
+                      //         fontStyle: FontStyle.italic,
+                      //         color: Colors.purple[200]))
                     ],
                   ),
                   SizedBox(
@@ -57,7 +58,7 @@ class WelcomePage extends StatelessWidget {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: ((context) => const LogInPage()),
+                              builder: ((context) =>  LogInPage()),
                             ),
                           );
                           // print(appCubit.spList[0].token);
@@ -77,7 +78,7 @@ class WelcomePage extends StatelessWidget {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: ((context) => const RegisterPage()),
+                              builder: ((context) =>  RegisterPage()),
                             ),
                           );
                         }),

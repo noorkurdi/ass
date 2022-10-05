@@ -8,12 +8,40 @@ class MyTextFeild extends StatelessWidget {
   TextEditingController controller;
   final String? lableText;
   final String? hintText;
+  final Icon? icon;
+  final TextInputType? textInputType;
+  final bool? hideInput;
+  final bool? readOnly;
+  final VoidCallback? onTap;
+  final bool? validator;
 
-  MyTextFeild({required this.controller, this.lableText, this.hintText});
+  MyTextFeild(
+      {required this.controller,
+      this.icon,
+      this.lableText,
+      this.hintText,
+      this.textInputType,
+      this.hideInput,
+      this.readOnly,
+      this.onTap,
+      this.validator});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      validator: validator==true?(value) {
+                      if (value == null) {
+                        return "هذا الحقل مطلوب";
+                      } else if (value == "") {
+                        return "هذا الحقل مطلوب";
+                      } else {
+                        return null;
+                      }
+                    }:null,
+      onTap: onTap,
+      readOnly: readOnly?? false,
+      obscureText: hideInput ?? false,
+      keyboardType: textInputType,
       controller: controller,
       cursorColor: AppColors.secondaryColor,
       style: TextStyle(
@@ -22,6 +50,8 @@ class MyTextFeild extends StatelessWidget {
         fontFamily: AppStrings.appFont,
       ),
       decoration: InputDecoration(
+        suffixIcon: icon,
+        suffixIconColor: AppColors.secondaryColor,
         hintStyle: TextStyle(fontSize: 20, color: AppColors.hintColor),
         hintText: hintText,
         labelText: lableText ?? '',
@@ -36,6 +66,7 @@ class MyTextFeild extends StatelessWidget {
             )),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
+            width: 2.5,
             color: AppColors.primaryColor,
           ),
           borderRadius: BorderRadius.circular(15),

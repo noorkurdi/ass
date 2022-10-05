@@ -39,6 +39,16 @@ class DioHelper {
     );
   }
 
+  
+static Future<Response> addCourse({
+    required Map<String, dynamic> data,
+  }) async {
+    return await dio.post(
+      ADDCOURSE,
+      data: FormData.fromMap(data),
+    );
+  }
+
   static Future<Response> editUserById(
       {required Map<String, dynamic> data, required int id}) async {
     return await dio.post("$EDIT$id", data: FormData.fromMap(data));

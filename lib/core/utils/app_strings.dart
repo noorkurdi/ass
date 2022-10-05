@@ -4,4 +4,6 @@ class AppStrings {
   static const String keyAccessToken = 'access_token';
   static const String appFont = 'ElMessiri';
   static const String appName = 'Assist';
+  static String user='';
+  static const String userType='user_type';
 }

@@ -23,7 +23,7 @@ class AppCubit extends Cubit<AppStates> {
 
   //controller
   SharedPreferences sharedPreferences;
-
+// userController
   TextEditingController firstNameArabicController = TextEditingController();
   TextEditingController middleNameArabicController = TextEditingController();
   TextEditingController lastNameArabicController = TextEditingController();
@@ -36,6 +36,17 @@ class AppCubit extends Cubit<AppStates> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
+  // courseController
+  TextEditingController courseNameController = TextEditingController();
+  TextEditingController descController = TextEditingController();
+  TextEditingController startDateController = TextEditingController();
+  TextEditingController numberOfSessionsController = TextEditingController();
+  TextEditingController numberOfHoursController = TextEditingController();
+  TextEditingController teacherIdController = TextEditingController();
+  TextEditingController courseTypeIdController = TextEditingController();
+  TextEditingController datesController = TextEditingController();
+
   late UsersModel usersModel;
 //events
 
@@ -82,18 +93,58 @@ class AppCubit extends Cubit<AppStates> {
         value,
       ) async {
         AppStrings.token = value.data[AppStrings.keyAccessToken];
+        AppStrings.user=value.data[AppStrings.userType].toString();
         sharedPreferences = await SharedPreferences.getInstance();
         sharedPreferences.setString('token', AppStrings.token);
+        if(AppStrings.user=='0'){
+          print('student');
+        } else if(AppStrings.user=='1'){
+          print('teacher');
+        }
+        else{print('admin');}
       });
       if (responce.statusCode == 200) {
+     
+        
         emit(RefreshUIAppState());
+        print('succed');
         return true;
       } else {
         emit(RefreshUIAppState());
         print(responce.statusCode.toString());
         return false;
       }
+  
     } on DioError catch (e) {
+      emit(RefreshUIAppState());
+      print(e);
+      return false;
+    }
+  }
+
+  Future<bool> addCourseEvents() async {
+    var data = {
+      'name': courseNameController.text.trim(),
+      'description': descController.text.trim() ?? '',
+      'start_date': startDateController.text.trim(),
+      'number_of_sessions': numberOfSessionsController.text.trim(),
+      'number_of_hours': numberOfHoursController.text.trim(),
+      'teacher_id': teacherIdController.text.trim(),
+      'course_type_id': courseTypeIdController.text.trim(),
+      'dates': datesController.text.trim(),
+    };
+    try {
+      var responce = await DioHelper.addCourse(data: data);
+      if (responce.statusCode == 200) {
+        emit(RefreshUIAppState());
+        print('succeed');
+        return true;
+      } else {
+        emit(RefreshUIAppState());
+        print(responce.statusCode.toString());
+        return false;
+      }
+    } catch (e) {
       emit(RefreshUIAppState());
       print(e);
       return false;

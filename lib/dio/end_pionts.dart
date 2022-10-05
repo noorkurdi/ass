@@ -10,4 +10,9 @@ const GETALLCOURSETYPES = '/api/coursesTypes/getAll';
 const GETALLCERTIFICATES = '/api/certificates/getAll';
 
 
+const ADDCOURSE ='/api/courses/add';
+const EDITCOURSE ='/api/courses/edit/';
+const DELETECOURSE ='/api/courses/delete/';
+
+const ADDCERTIFICATE ='/api/certificates/add';
 /// baseUrl + endpoint

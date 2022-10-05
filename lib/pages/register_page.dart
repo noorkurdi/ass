@@ -1,14 +1,19 @@
 import 'package:assist_app/bloc/cubit/app_cubit.dart';
+import 'package:assist_app/core/utils/app_strings.dart';
 import 'package:assist_app/pages/home_page.dart';
+import 'package:assist_app/widgets/my_dropdown_menu.dart';
+import 'package:assist_app/widgets/my_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import '../core/utils/app_colors.dart';
 import '../widgets/my_button.dart';
 import 'login_page.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+   RegisterPage({Key? key}) : super(key: key);
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -22,401 +27,230 @@ class RegisterPage extends StatelessWidget {
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    // Container(
-                    //   height: 180,
-                    //   child: Image.asset('images/1.jpg'),
-                    // ),
-                    TextFormField(
-                      controller: appCubit.firstNameArabicController,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: 'first name arabic',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
+                child: Form(
+                  key: formKey,
+                                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Container(
+                        height: 75,
+                        width: 200,
+                          child: Row(
+                        children: [
+                          Text(
+                            'إنشاء حساب جديد',
+                            
+                            style: TextStyle(
+                              fontSize: 40,
+                              color: AppColors.secondaryColor,
+                              fontFamily: AppStrings.appFont,
+                              
+                            ),
                           ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.purple[200]!, width: 1),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
+                          SizedBox(
+                            width: 10,
                           ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.blue[200]!, width: 2),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
+                          // Icon(Icons.list,size: 30,color: AppColors.secondaryColor,),
+                        ],
+                      )),
+                      
+              Divider(
+                  color: Colors.grey[550],
+                  thickness: 3,
+              ),
+                 SizedBox(
+                            width: 7,
                           ),
-                        ),
+                      MyTextFeild(
+                        validator: true,
+                          controller: appCubit.firstNameArabicController,
+                          lableText: 'الأسم الاول'),
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    SizedBox(
-                      height: 7,
-                    ),
-                    TextFormField(
-                      controller: appCubit.middleNameArabicController,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: 'middle name arabic',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.purple[200]!, width: 1),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.blue[200]!, width: 2),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
+                      MyTextFeild(
+                        validator: true,
+                        controller: appCubit.middleNameArabicController,
+                        lableText: 'الأسم الأوسط',
                       ),
-                    ),
-                    SizedBox(
-                      height: 7,
-                    ),
-                    TextFormField(
-                      controller: appCubit.lastNameArabicController,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: 'last name arabic',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.purple[200]!, width: 1),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.blue[200]!, width: 2),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
+                      MyTextFeild(
+                        validator: true,
+                        controller: appCubit.lastNameArabicController,
+                        lableText: "الأسم الأخير",
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      MyTextFeild(
+                        validator: true,
+                        controller: appCubit.firstNameEnglishController,
+                        lableText: 'First Name',
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      MyTextFeild(
+                        validator: true,
+                        controller: appCubit.middleNameEnglishController,
+                        lableText: 'Middle Name',
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      MyTextFeild(
+                        validator: true,
+                        controller: appCubit.lastNameEnglishController,
+                        lableText: 'Last Name',
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      MyTextFeild(
+                        validator: true,
+                        controller: appCubit.specializationController,
+                        lableText: 'الأختصاص',
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      MyTextFeild(
+                        validator: true,
+                        controller: appCubit.countryController,
+                        lableText: "المدينة",
+                        
+                        
 
-                    SizedBox(
-                      height: 7,
-                    ),
-                    TextFormField(
-                      controller: appCubit.firstNameEnglishController,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: 'fisrt name english',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.purple[200]!, width: 1),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.blue[200]!, width: 2),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 7,
-                    ),
-                    TextFormField(
-                      controller: appCubit.middleNameEnglishController,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: 'middle name english',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.purple[200]!, width: 1),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.blue[200]!, width: 2),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    SizedBox(
-                      height: 7,
-                    ),
-                    TextFormField(
-                      controller: appCubit.lastNameEnglishController,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: 'last name english',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.purple[200]!, width: 1),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.blue[200]!, width: 2),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
+                      MyTextFeild(
+                        validator: true,
+                        controller: appCubit.emailController,
+                        lableText: "البريد الألكتروني",
+                        textInputType: TextInputType.emailAddress,
+                        hintText: 'ahmad@gmail.com',
                       ),
-                    ),
-                    SizedBox(
-                      height: 7,
-                    ),
-                    TextFormField(
-                      controller: appCubit.specializationController,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: 'specialization',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.purple[200]!, width: 1),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.blue[200]!, width: 2),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    SizedBox(
-                      height: 7,
-                    ),
-                    TextFormField(
-                      controller: appCubit.countryController,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: 'country',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.purple[200]!, width: 1),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.blue[200]!, width: 2),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
+                      MyTextFeild(
+                        validator: true,
+                        controller: appCubit.birthController,
+                        lableText: "تاريخ الميلاد",
+                        textInputType: TextInputType.datetime,
+                        readOnly: true,
+                        onTap: () async {
+                          
+                        DateTime? pickeddate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(1950),
+                            lastDate: DateTime.now());
+
+                        if (pickeddate != null) {
+                          appCubit.birthController.text =
+                              DateFormat('yyyy-MM-dd').format(pickeddate);
+
+                        };
+                        }
                       ),
-                    ),
-                    SizedBox(
-                      height: 7,
-                    ),
-                    TextFormField(
-                      controller: appCubit.birthController,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: 'birth',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.purple[200]!, width: 1),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.blue[200]!, width: 2),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    SizedBox(
-                      height: 7,
-                    ),
-                    TextFormField(
-                      controller: appCubit.phoneController,
-                      keyboardType: TextInputType.emailAddress,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: 'phone',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.purple[200]!, width: 1),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.blue[200]!, width: 2),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
+                      MyTextFeild(
+                        validator: true,
+                        controller: appCubit.phoneController,
+                        lableText: "رقم الهاتف",
+                        textInputType: TextInputType.phone,
+                        hintText:'09xxxxxxxx'
                       ),
-                    ),
-                    SizedBox(
-                      height: 7,
-                    ),
-                    TextFormField(
-                      controller: appCubit.emailController,
-                      keyboardType: TextInputType.emailAddress,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: 'Enter Your Email',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.purple[200]!, width: 1),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.blue[200]!, width: 2),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    SizedBox(
-                      height: 7,
-                    ),
-                    TextFormField(
-                      controller: appCubit.passwordController,
-                      obscureText: true,
-                      textAlign: TextAlign.center,
-                      decoration: InputDecoration(
-                        hintText: 'Enter Your Password',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.purple[200]!, width: 1),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.blue[200]!, width: 2),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
-                        ),
+                      MyTextFeild(
+                        validator: true,
+                        controller: appCubit.passwordController,
+                        lableText: "كلمة السر",
+                        textInputType: TextInputType.visiblePassword,
+                        hideInput: true,
+                        hintText: 'xxxxxxxx',
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    MyButton(
-                        primaryColor: AppColors.primaryColor,
-                        textColor: Colors.white,
-                        minWid: 10,
-                        minHeight: 35,
-                        maxWid: 10,
-                        maxHeight: 35,
-                        title: 'Register',
-                        onPressed: () async {
-                          await appCubit
-                              .registerEvents()
-                              .then((value) => print(value));
-                          Navigator.push(
+                      // TextFormField(
+                      //   controller: appCubit.passwordController,
+                      //   obscureText: true,
+                      //   textAlign: TextAlign.center,
+                      //   decoration: InputDecoration(
+                      //     hintText: 'Enter Your Password',
+                      //     border: OutlineInputBorder(
+                      //       borderRadius: BorderRadius.all(
+                      //         Radius.circular(15),
+                      //       ),
+                      //     ),
+                      //     enabledBorder: OutlineInputBorder(
+                      //       borderSide:
+                      //           BorderSide(color: Colors.purple[200]!, width: 1),
+                      //       borderRadius: BorderRadius.all(
+                      //         Radius.circular(15),
+                      //       ),
+                      //     ),
+                      //     focusedBorder: OutlineInputBorder(
+                      //       borderSide:
+                      //           BorderSide(color: Colors.blue[200]!, width: 2),
+                      //       borderRadius: BorderRadius.all(
+                      //         Radius.circular(15),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      MyButton(
+                          primaryColor: AppColors.primaryColor,
+                          textColor: Colors.white,
+                          minWid: 10,
+                          minHeight: 35,
+                          maxWid: 10,
+                          maxHeight: 35,
+                          title: 'Register',
+                          onPressed: () async {
+                              if (formKey.currentState!.validate()) {
+                            await appCubit
+                                .registerEvents()
+                                .then((value) => print(value));
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomePage(),
+                              
+                              ),
+                            );}
+                          }),
+                          SizedBox(
+                        height: 5,
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => HomePage(),
+                              builder: ((context) =>  LogInPage()),
                             ),
                           );
-                        }),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: ((context) => const LogInPage()),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        'Do you have account?',
-                        style:
-                            TextStyle(color: Colors.purple[200], fontSize: 15),
+                        },
+                        child: Text(
+                          'لديك حساب؟',
+                          style:
+                              TextStyle(color: AppColors.secondaryColor, fontSize: 15),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ));
