@@ -1,16 +1,15 @@
-import 'dart:convert';
 
+
+import 'package:assist_app/core/enums/connection_enum.dart';
 import 'package:assist_app/core/utils/app_strings.dart';
-import 'package:assist_app/models/certificates_model.dart';
-import 'package:assist_app/models/course_types_model.dart';
-import 'package:assist_app/models/courses_model.dart';
+
 import 'package:assist_app/models/users_model.dart';
-import 'package:assist_app/pages/welcome_page.dart';
-import 'package:bloc/bloc.dart';
+
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:meta/meta.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../dio/dio_helper.dart';
@@ -21,6 +20,8 @@ class AppCubit extends Cubit<AppStates> {
   AppCubit(this.sharedPreferences) : super(AppInitialState());
   static AppCubit get(context) => BlocProvider.of(context);
 
+  ConnectionEnum connectionEnum = ConnectionEnum.notConnected;
+  
   //controller
   SharedPreferences sharedPreferences;
 // userController
@@ -88,20 +89,27 @@ class AppCubit extends Cubit<AppStates> {
       'email': emailController.text.trim(),
       'password': passwordController.text,
     };
+    
     try {
+      connectionEnum=ConnectionEnum.isConnecting;
       var responce = await DioHelper.login(data: data).then((
         value,
       ) async {
+        connectionEnum= ConnectionEnum.isConnecting;
         AppStrings.token = value.data[AppStrings.keyAccessToken];
         AppStrings.user=value.data[AppStrings.userType].toString();
+        
         sharedPreferences = await SharedPreferences.getInstance();
         sharedPreferences.setString('token', AppStrings.token);
+        
+       
         if(AppStrings.user=='0'){
           print('student');
         } else if(AppStrings.user=='1'){
           print('teacher');
         }
         else{print('admin');}
+
       });
       if (responce.statusCode == 200) {
      
@@ -203,8 +211,8 @@ class AppCubit extends Cubit<AppStates> {
     }
   }
 
-  Future<void> getToken() async {
-    String? token;
+  Future<void> getToken(String? token) async {
+    
     sharedPreferences = await SharedPreferences.getInstance();
     token = sharedPreferences.getString('token') ?? 'no token';
     print(token);
@@ -212,12 +220,49 @@ class AppCubit extends Cubit<AppStates> {
 
   Future<void> logOut() async {
     try {
+
       String token;
       sharedPreferences = await SharedPreferences.getInstance();
       token = sharedPreferences.getString('token') ?? 'no token';
       print(token);
       var response = await DioHelper.logOut(token);
       if (response.statusCode == 200) {
+        print('logedOut');
+        emit(RefreshUIAppState());
+      } else {
+        emit(RefreshUIAppState());
+        print(response.statusCode.toString());
+      }
+    } on DioError catch (e) {
+      emit(RefreshUIAppState());
+    }
+  }
+
+  Future<void> me() async {
+    try {
+      String token;
+      sharedPreferences = await SharedPreferences.getInstance();
+      token = sharedPreferences.getString('token') ?? 'no token';
+     
+      var response = await DioHelper.me(token).then((value) async{ 
+      AppStrings.firstNameArabic=value.data["first_name_ar"].toString();
+      AppStrings.middleNameArabic=value.data["middle_name_ar"].toString();
+      AppStrings.lastNameArabic=value.data["last_name_ar"].toString();
+      AppStrings.firstNameEnglish=value.data["first_name_en"].toString();
+      AppStrings.middleNameEnglish=value.data["middle_name_en"].toString();
+      AppStrings.lastNameEnglish=value.data["last_name_en"].toString();
+      AppStrings.specialization=value.data["specialization"].toString();
+      AppStrings.country=value.data["country"].toString();
+      AppStrings.birth=value.data["birthday"].toString();
+      AppStrings.email=value.data["email"].toString();
+      AppStrings.phone=value.data["phone"].toString();
+      print(AppStrings.firstNameArabic);
+      });
+    
+      
+      if (response.statusCode == 200) {
+
+
         emit(RefreshUIAppState());
       } else {
         emit(RefreshUIAppState());

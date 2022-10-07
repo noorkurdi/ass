@@ -2,12 +2,13 @@ import 'package:assist_app/core/utils/app_colors.dart';
 import 'package:assist_app/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 
-ThemeData appTheme(Key key) {
+ThemeData appTheme() {
   return ThemeData(
     primaryColor: AppColors.primaryColor,
     hintColor: AppColors.hintColor,
     brightness: Brightness.light,
     fontFamily: AppStrings.appFont,
+    scaffoldBackgroundColor: Colors.white,
     appBarTheme: AppBarTheme(
       centerTitle: true,
       color: AppColors.primaryColor,
@@ -15,11 +16,11 @@ ThemeData appTheme(Key key) {
       titleTextStyle: TextStyle(
           color: AppColors.secondaryColor,
           fontSize: 25,
-          fontWeight: FontWeight.bold),
+          fontWeight: FontWeight.bold,),
     ),
     textTheme: TextTheme(
-      bodyMedium: TextStyle(
-        color: AppColors.primaryColor,
+      bodyMedium: const TextStyle(
+        color: Colors.white,
         fontSize: 22,
         height: 1.4,
       ),
@@ -27,7 +28,7 @@ ThemeData appTheme(Key key) {
         fontSize: 16,
         color: Colors.white,
         fontWeight: FontWeight.bold,
-        fontFamily: AppStrings.appFont,
+        
       ),
     ),
   );

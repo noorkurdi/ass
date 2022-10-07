@@ -65,6 +65,11 @@ static Future<Response> addCourse({
         options: Options(headers: {'Authorization': 'Bearer $token'}));
   }
 
+   static Future<Response> me(String token) async {
+    return await dio.post(ME,
+        options: Options(headers: {'Authorization': 'Bearer $token'}));
+  }
+
   ///////get data
   ///
   ///

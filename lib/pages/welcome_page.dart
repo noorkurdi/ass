@@ -54,7 +54,7 @@ class WelcomePage extends StatelessWidget {
                         maxHeight: 40,
                         title: 'تسجيل الدخول',
                         onPressed: () {
-                          appCubit.getToken();
+                          
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(

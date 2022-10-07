@@ -10,7 +10,7 @@ class CoursesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      drawer: MyDrawer(),
+      endDrawer: MyDrawer(),
       body: Container(),
     );
   }

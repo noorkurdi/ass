@@ -14,6 +14,10 @@ class MyTextFeild extends StatelessWidget {
   final bool? readOnly;
   final VoidCallback? onTap;
   final bool? validator;
+final bool? border;
+final double? fontSize;
+final Color? focusedBorderColor;
+final double? focusedBorderWidth;
 
   MyTextFeild(
       {required this.controller,
@@ -24,53 +28,67 @@ class MyTextFeild extends StatelessWidget {
       this.hideInput,
       this.readOnly,
       this.onTap,
-      this.validator});
+      this.validator,
+      this.border,
+      this.fontSize,
+      this.focusedBorderColor,
+      this.focusedBorderWidth});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      validator: validator==true?(value) {
-                      if (value == null) {
-                        return "هذا الحقل مطلوب";
-                      } else if (value == "") {
-                        return "هذا الحقل مطلوب";
-                      } else {
-                        return null;
-                      }
-                    }:null,
+
+      validator: validator == true
+          ? (value) {
+              if (value == null) {
+                return "هذا الحقل مطلوب";
+              } else if (value == "") {
+                return "هذا الحقل مطلوب";
+              } else {
+                return null;
+              }
+            }
+          : null,
+          
       onTap: onTap,
-      readOnly: readOnly?? false,
+      readOnly: readOnly ?? false,
       obscureText: hideInput ?? false,
       keyboardType: textInputType,
       controller: controller,
       cursorColor: AppColors.secondaryColor,
+      
       style: TextStyle(
-        fontSize: 25,
+        
+        fontSize: fontSize,
         color: AppColors.secondaryColor,
         fontFamily: AppStrings.appFont,
       ),
       decoration: InputDecoration(
+        
         suffixIcon: icon,
         suffixIconColor: AppColors.secondaryColor,
         hintStyle: TextStyle(fontSize: 20, color: AppColors.hintColor),
         hintText: hintText,
         labelText: lableText ?? '',
         labelStyle: TextStyle(
+        
             color: AppColors.hintColor,
-            fontSize: 20,
+            fontSize: fontSize,
             fontFamily: AppStrings.appFont),
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15),
+        border:border==true? OutlineInputBorder(
+        
+          borderRadius: BorderRadius.circular(15),
             borderSide: BorderSide(
               color: AppColors.primaryColor,
-            )),
-        focusedBorder: OutlineInputBorder(
+            )):null,
+        focusedBorder: border == true ?OutlineInputBorder(
           borderSide: BorderSide(
-            width: 2.5,
-            color: AppColors.primaryColor,
+            width: focusedBorderWidth??2.5,
+            color: focusedBorderColor??AppColors.primaryColor,
           ),
           borderRadius: BorderRadius.circular(15),
-        ),
+        ):null,
+      
       ),
     );
   }

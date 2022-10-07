@@ -12,6 +12,7 @@ class MyButton extends StatelessWidget {
       required this.maxWid,
       required this.maxHeight,
       this.elevation,
+      this.textSize,
       required this.textColor});
 
   final Color primaryColor;
@@ -23,6 +24,7 @@ class MyButton extends StatelessWidget {
   final double maxWid;
   final double maxHeight;
   final double? elevation;
+  final double? textSize;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class MyButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         textStyle: TextStyle(
-          fontSize: 25,
+          fontSize: textSize??25,
           fontFamily: AppStrings.appFont,
         ),
       ),

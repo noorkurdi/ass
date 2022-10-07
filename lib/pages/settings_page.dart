@@ -11,7 +11,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      drawer: const MyDrawer(),
+      endDrawer: const MyDrawer(),
       body: Container(),
     );
   }

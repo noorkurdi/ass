@@ -6,4 +6,16 @@ class AppStrings {
   static const String appName = 'Assist';
   static String user='';
   static const String userType='user_type';
+  static  String firstNameArabic="";
+  static  String middleNameArabic="";
+  static  String lastNameArabic="";
+  static  String firstNameEnglish="";
+  static  String middleNameEnglish="";
+  static  String lastNameEnglish="";
+  static  String specialization="";
+  static  String country="";
+  static  String birth="";
+  static  String phone="";
+  static  String email="";
+  
 }

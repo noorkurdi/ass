@@ -94,7 +94,9 @@ Container(
                         title: 'تسجيل الدخول',
                         onPressed: ()  {
                            if (formKey.currentState!.validate()) {
+                             
                            appCubit.logInEvents();
+                           appCubit.me();
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
